@@ -1,0 +1,98 @@
+################################################################################
+# General Settings
+################################################################################
+#-------------------------------------------------------------------------------
+# Set up vault directory
+#-------------------------------------------------------------------------------
+export V=$HOME/Vault
+
+
+#-------------------------------------------------------------------------------
+# History
+#-------------------------------------------------------------------------------
+# Append to the history file (don't overwrite it).
+shopt -s histappend
+
+# Don't put duplicate lines in the history
+export HISTCONTROL=ignorespace:erasedups
+
+# Increase history file
+HISTSIZE=999999
+HISTFILESIZE=999999
+
+# Record timestamps
+HISTTIMEFORMAT="%F %T"
+
+# Use one command per line
+shopt -s cmdhist
+
+
+#-------------------------------------------------------------------------------
+# Misc (a few more)
+#-------------------------------------------------------------------------------
+# Add Git branch info in $PS1 if the current directory is under version control.
+export PS1="[\u@\h \W]\$(parse_git_branch)\$ "
+
+# Automatically fix minor directory spelling error
+shopt -s cdspell
+
+# Enable 256 color terminal
+export TERM=xterm-256color
+
+# Turn off the terminal driver flow control (default Ctrl-s/Ctrl-q behavior)
+stty -ixon -ixoff
+
+
+################################################################################
+# Machine specific settings
+################################################################################
+#-------------------------------------------------------------------------------
+# MacOS
+#-------------------------------------------------------------------------------
+if [ "$(uname)" == "Darwin" ]; then
+
+    # OSX specific all-purpose bash file
+    if [ -f $HOME/.bash_osx ]; then
+        source $HOME/.bash_osx
+    fi
+
+#-------------------------------------------------------------------------------
+# Linux
+#-------------------------------------------------------------------------------
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ] ; then
+
+    # Linux specific all-purpose bash file
+    if [ -f ~/.bash_linux ]; then
+        source $HOME/.bash_linux
+    fi
+
+fi
+
+
+
+################################################################################
+# Source required bash files.
+################################################################################
+#-------------------------------------------------------------------------------
+# Source .bash_aliases
+#-------------------------------------------------------------------------------
+if [ -f $HOME/.bash_aliases ]; then
+    source $HOME/.bash_aliases
+fi
+
+
+#-------------------------------------------------------------------------------
+# Source .bash_functions
+#-------------------------------------------------------------------------------
+if [ -f $HOME/.bash_functions ]; then
+    source $HOME/.bash_functions
+fi
+
+
+#-------------------------------------------------------------------------------
+# Source .bash_local
+# If a user wants to add custom aliases, functions etc., this file can be used.
+#-------------------------------------------------------------------------------
+if [ -f $HOME/.bash_local ]; then
+    source $HOME/.bash_local
+fi
