@@ -1,0 +1,9 @@
+" Back up files
+**/*.bak
+
+" DS_Store
+.DS_Store
+
+" Swap files
+*.sw?
+

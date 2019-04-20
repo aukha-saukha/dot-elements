@@ -1,0 +1,8 @@
+################################################################################
+# Frequently used commands
+################################################################################
+# (install) packages using apt package handling utility
+alias agi="sudo apt-get install"
+
+# (update) packages using apt package handling utility
+alias aui="sudo apt-get update"
